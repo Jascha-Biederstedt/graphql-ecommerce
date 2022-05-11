@@ -1,5 +1,8 @@
 exports.Query = {
-  products: (parent, args, { products }) => products,
+  products: (parent, { filter }, { products }) =>
+    filter && filter.onSale
+      ? products.filter(product => product.onSale)
+      : products,
   product: (parent, { id }, { products }) =>
     products.find(product => product.id === id),
 
