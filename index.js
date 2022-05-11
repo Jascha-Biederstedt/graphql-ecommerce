@@ -87,6 +87,7 @@ const products = [
 const typeDefs = gql`
   type Query {
     products: [Product!]!
+    product(id: ID!): Product
   }
 
   type Product {
@@ -94,6 +95,7 @@ const typeDefs = gql`
     description: String!
     quantity: Int!
     price: Float!
+    image: String!
     onSale: Boolean!
   }
 `;
@@ -102,6 +104,13 @@ const resolvers = {
   Query: {
     products: () => {
       return products;
+    },
+    product: (parent, args, context) => {
+      const productID = args.id;
+
+      const product = products.find(product => product.id === productID);
+
+      return product || null;
     },
   },
 };
