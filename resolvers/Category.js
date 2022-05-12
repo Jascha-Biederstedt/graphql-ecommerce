@@ -1,6 +1,6 @@
 exports.Category = {
-  products: ({ id: categoryId }, { filter }, { products, reviews }) => {
-    const categoryProducts = products.filter(
+  products: ({ id: categoryId }, { filter }, { db }) => {
+    const categoryProducts = db.products.filter(
       product => product.categoryId === categoryId
     );
 
@@ -8,7 +8,7 @@ exports.Category = {
 
     if (filter) {
       if (filter.onSale === true) {
-        filteredProducts = products.filter(product => product.onSale);
+        filteredProducts = filteredProducts.filter(product => product.onSale);
       }
 
       if ([1, 2, 3, 4, 5].includes(filter.avgRating)) {
@@ -16,7 +16,7 @@ exports.Category = {
           let sumRating = 0;
           let numberOfReviews = 0;
 
-          reviews.forEach(review => {
+          db.reviews.forEach(review => {
             if (review.productId === product.id) {
               sumRating += review.rating;
               numberOfReviews++;
