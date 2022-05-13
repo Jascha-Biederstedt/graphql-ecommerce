@@ -84,11 +84,26 @@ exports.Mutation = {
   updateCategory: (parent, { id, input }, { db }) => {
     const index = db.categories.findIndex(category => category.id === id);
 
+    if (index === -1) return null;
+
     db.categories[index] = {
       ...db.categories[index],
       ...input,
     };
 
     return db.categories[index];
+  },
+
+  updateProduct: (parent, { id, input }, { db }) => {
+    const index = db.products.findIndex(product => product.id === id);
+
+    if (index === -1) return null;
+
+    db.products[index] = {
+      ...db.products[index],
+      ...input,
+    };
+
+    return db.products[index];
   },
 };
