@@ -17,6 +17,7 @@ exports.typeDefs = gql`
     deleteReview(id: ID!): Boolean!
     updateCategory(id: ID!, input: UpdateCategoryInput!): Category
     updateProduct(id: ID!, input: UpdateProductInput!): Product
+    updateReview(id: ID!, input: UpdateReviewInput!): Review
   }
 
   type Product {
@@ -83,5 +84,12 @@ exports.typeDefs = gql`
     image: String
     onSale: Boolean
     categoryId: String
+  }
+
+  input UpdateReviewInput {
+    date: String
+    title: String
+    comment: String
+    rating: Int
   }
 `;

@@ -106,4 +106,17 @@ exports.Mutation = {
 
     return db.products[index];
   },
+
+  updateReview: (parent, { id, input }, { db }) => {
+    const index = db.reviews.findIndex(review => review.id === id);
+
+    if (index === -1) return null;
+
+    db.reviews[index] = {
+      ...db.reviews[index],
+      ...input,
+    };
+
+    return db.reviews[index];
+  },
 };
